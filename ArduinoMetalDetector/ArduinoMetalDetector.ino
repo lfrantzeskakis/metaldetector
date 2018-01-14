@@ -19,7 +19,7 @@
 #include <LiquidCrystal_PCF8574.h>
 
 LiquidCrystal_PCF8574 lcd(0x27);  // set the LCD address to 0x27 for a 16 chars and 2 line display
-const long fps=150;
+const long fps=150; //refresh rate of the screen
 unsigned long lastSignalTime = 0;
 unsigned long signalTimeDelta = 0;
 unsigned long currentime=0;
@@ -63,9 +63,9 @@ void setuplcd()
   delay(2000);  
   lcd.home(); lcd.clear();
   lcd.setCursor(0, 0);
-  lcd.print("     Lambros        Triger  ");
+  lcd.print("     name        Triger  ");
   lcd.setCursor(0, 1);
-  lcd.print(" Frantzeskakis      Start ");
+  lcd.print("     here      Start "); //give your name to your detector!
   delay(2000);
   for(int i=0; i<14 ; i++)
   lcd.scrollDisplayLeft();
@@ -146,7 +146,7 @@ void loop()
     float sensitivity = mapFloat(analogRead(SENSITIVITY_POT_APIN), 0, 1023, 0.5, 10.0);
     int storedTimeDeltaDifference = (storedTimeDelta - signalTimeDelta) * sensitivity;
     tone(SPEAKER_PIN, BASE_TONE_FREQUENCY + storedTimeDeltaDifference);
-    metal=(storedTimeDeltaDifference-SPINNER_THRESHOLD)*10;
+    metal=(storedTimeDeltaDifference-SPINNER_THRESHOLD);
     displayer(storedTimeDeltaDifference,sensitivity,metal);
     
 
